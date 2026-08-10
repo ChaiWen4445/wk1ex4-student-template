@@ -15,7 +15,6 @@ jobs:
     steps:
       - name: Submit commit for grading
         env:
-          AUTOGRADER_API_KEY: ${{ secrets.AUTOGRADER_API_KEY }}
           REPOSITORY: ${{ github.repository }}
           COMMIT_SHA: ${{ github.sha }}
         run: |
@@ -23,7 +22,6 @@ jobs:
             -X POST \
             "https://autograder.workautomate.cc/api/grade" \
             -H "Content-Type: application/json" \
-            -H "X-Autograder-Key: $AUTOGRADER_API_KEY" \
             -d "{
               \"assignment\": \"wk1ex4\",
               \"repository\": \"$REPOSITORY\",
