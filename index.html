@@ -57,7 +57,7 @@ input,textarea{
 }
 pre{
     background:#222;
-    color:#ff0; /*Change to #0f0 to indicate task complete*/
+    color: #0f0; /*Change to #0f0 to indicate task complete*/
     padding:10px;
     overflow:auto;
 }
@@ -125,15 +125,19 @@ async function getPost(){
     const id = document.getElementById("postID").value;
 
     // Perform GET request using fetch() from
+    const datas = await fetch("https://jsonplaceholder.typicode.com/posts/" + id)
     // https://jsonplaceholder.typicode.com/posts/
     // using id as the path parameter
-    const response = ""
+    const response = datas;
+    console.log(datas);
 
-    const data = await response.json();
+    const data = await datas.json();
 
-    console.log(data)
+    console.log(data);
 
     // Show results on browser
+    document.getElementById("getResult").textContent = 
+        JSON.stringify(data,null,4)
 }
 
 
@@ -149,13 +153,17 @@ async function createPost(){
         "https://jsonplaceholder.typicode.com/posts",
         {
             // Complete the POST request
-            method:"",
+            method:"POST",
 
             headers:{
-                
+                "Content-Type":"application/json"
             },
 
-            body:""
+            body:JSON.stringify({
+                title:title,
+                body:body,
+                userId:1
+            })
         }
     );
 
